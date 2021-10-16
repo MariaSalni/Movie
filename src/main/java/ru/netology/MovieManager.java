@@ -1,47 +1,48 @@
 package ru.netology;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import ru.netology.Movie;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class MovieManager {
 
     private int defaultMovieLength = 10;
+    private Movie[] movies = new Movie[0];
 
 
-
-    private MovieManager[] items = new MovieManager[0];
-
-    public void add (MovieManager item) {
-        int length = items.length + 1;
-        MovieManager[] tmp = new MovieManager[length];
-
-        System.arraycopy(items, 0, tmp, 0, items.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        items = tmp;
+    public MovieManager(int customMovieLength) {
+        if (customMovieLength > 0) {
+            defaultMovieLength = customMovieLength;
+        }
     }
 
-    public MovieManager[] findAll () { return items;}
+    public void add (Movie movie) {
+        int length = movies.length + 1;
+        Movie[] tmp = new Movie[length];
+        for (int i = 0; i < movies.length; i++) {
+            tmp[i] = movies[i];
+        }
+        //System.arraycopy(items, 0, tmp, 0, items.length);
+        int lastMovie = tmp.length - 1;
+        tmp[lastMovie] = movie;
+        movies = tmp;
+    }
 
-    //public void getById (int id) {
-        //int length = items.length - 1;
-       // MovieManager[] tmp = new MovieManager[length];
-        //int index = 0;
-        //for (MovieManager item : items) {
-         //   if (item.getId() != id) {
-         //       tmp[index] = item;
-         //       index ++;
-        //    }
-        //}
-        //items = tmp;
-    //}
 
-    public MovieManager[] getLastAdd() {
-        int moviesLength = items.length;
+    public Movie[] getLastAdd() {
+        int moviesLength = movies.length;
         if (moviesLength < defaultMovieLength) {
             defaultMovieLength = moviesLength;
         }
-        MovieManager[] customFilm = new MovieManager[defaultMovieLength];
+        Movie[] customFilm = new Movie[defaultMovieLength];
         for (int i = 0; i < customFilm.length; i++) {
             int result = moviesLength - i - 1;
-            customFilm[i] = items[result];
+            customFilm[i] = movies [result];
 
         }
         return customFilm;

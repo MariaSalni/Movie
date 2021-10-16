@@ -1,6 +1,5 @@
 package ru.netology;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -71,6 +70,31 @@ class MovieManagerTest {
         manager.add(movieToAdd);
         Movie[] actual = manager.getLastAdd();
         Movie[] expected = {new Movie(11, "Chan-Chi", "thriller", "11.png"), tenth, ninth, eighth};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowNoMovie() {
+        MovieManager manager = new MovieManager(0);
+        Movie[] actual = manager.getLastAdd();
+        Movie [] expected = new Movie[0];
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowOverMax() {
+        MovieManager manager = new MovieManager(11);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+        manager.add(fifth);
+        manager.add(sixth);
+        manager.add(seventh);
+        manager.add(eighth);
+        manager.add(ninth);
+        manager.add(tenth);
+        Movie[] actual = manager.getLastAdd();
         assertArrayEquals(expected, actual);
     }
 }

@@ -1,13 +1,10 @@
 package ru.netology;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.netology.Movie;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 
 public class MovieManager {
 
